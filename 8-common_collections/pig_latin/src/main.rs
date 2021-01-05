@@ -10,18 +10,18 @@ fn main() {
 fn convert_to_pig_latin(text: &str) -> String
 {
     let mut chars = text.chars().peekable();
-    let mut new_s = String::new();
+    let mut pigified_text = String::new();
     while let Some(c) = chars.next() {
         let suffix = match c {
             'a' | 'e' | 'i' | 'o' | 'u' => {
-                new_s.push(c);
+                pigified_text.push(c);
                 String::from("-hay")
             }
             'a'...'z' | 'A'...'Z' => {
                 format!("-{}ay", c)
             }
             _ => {
-                new_s.push(c);
+                pigified_text.push(c);
                 continue;
             }
         };
@@ -30,13 +30,13 @@ fn convert_to_pig_latin(text: &str) -> String
             match c {
                 'a'...'z' | 'A'...'Z' => {
                     chars.next();
-                    new_s.push(c);
+                    pigified_text.push(c);
                 }
                 _ => break,
             }
         }
     
-        new_s += &suffix;
+        pigified_text += &suffix;
     }
-    new_s
+    pigified_text
 }
